@@ -2,6 +2,7 @@ import os
 import asyncio
 import threading
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # <--- Обязательно для связи Vercel и Render
 from aiogram import Bot
 from aiogram.enums import ParseMode
 
@@ -9,10 +10,11 @@ from aiogram.enums import ParseMode
 import bot as bot_module
 
 app = Flask(__name__)
+CORS(app)  # <--- Разрешаем кросс-доменные запросы с твоего сайта
 
-# Берем токен и ID из импортированного файла bot.py (или из переменных окружения)
+# Берем токен и ID из импортированного файла bot.py
 BOT_TOKEN = getattr(bot_module, "TOKEN", "8902518699:AAFD1yArCMiwoaOn8zPUcubr0W2NemriQlk")
-MY_TELEGRAM_ID = getattr(bot_module, "MY_TELEGRAM_ID", "ТВОЙ_CHAT_ID")
+MY_TELEGRAM_ID = getattr(bot_module, "MY_TELEGRAM_ID", "8617178928")
 bot = bot_module.bot
 dp = bot_module.dp
 
